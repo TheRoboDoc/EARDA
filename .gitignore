@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/EARDA/tokens.resx
+/EARDA/tokens.Designer.cs

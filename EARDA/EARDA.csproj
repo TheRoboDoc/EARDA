@@ -11,4 +11,19 @@
     <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02356" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="tokens.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>tokens.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="tokens.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>tokens.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
