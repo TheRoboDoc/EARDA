@@ -1,2 +1,2 @@
 # EARDA
-## Embed Ad Removal Discord App
+## Embed Advertisement Removal Discord App
