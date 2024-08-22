@@ -72,9 +72,9 @@ namespace EARDA
                 {
                     fileInfo.Delete();
                 }
-                catch
+                catch (Exception e)
                 {
-                    Program.WriteLog(LogLevel.Error, $"Failed to delete video '{path}'", new EventId(201, "File Manager"));
+                    Program.WriteLog(LogLevel.Error, $"{e.Message}", new EventId(201, "File Manager"));
                 }
             });
         }
