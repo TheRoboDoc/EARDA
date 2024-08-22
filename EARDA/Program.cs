@@ -31,6 +31,15 @@ namespace EARDA
                 builder.SetLogLevel(LogLevel.Information);
             }
 
+            builder.ConfigureEventHandlers
+            (
+                x =>
+                x.HandleMessageCreated(async (client, args) =>
+                {
+                    await Message.Handler.MessagePosted(args);
+                })
+            );
+
             Client = builder.Build();
 
             WriteLog(LogLevel.Information, "Starting up...", LoggerEvents.Startup);
