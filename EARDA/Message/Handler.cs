@@ -21,7 +21,7 @@ namespace EARDA.Message
 
             DiscordMessageBuilder builder = new();
 
-            FileManager.Video video = await FileManager.DownloadVideo(messageArgs.Message.Id, messageArgs.Message.Content);
+            FileManager.Video video = await FileManager.DownloadVideo(messageArgs.Message.Id, await GetLinkFromMessage(messageArgs.Message.Content));
 
             if (!FileManager.FileSizeCheck(new FileInfo(video.Path)))
             {
@@ -58,6 +58,33 @@ namespace EARDA.Message
             await messageArgs.Message.ModifyEmbedSuppressionAsync(true);
 
             await FileManager.DeleteVideo(video.Path);
+        }
+
+        public static async Task<string> GetLinkFromMessage(string content)
+        {
+            return await Task.Run(() => 
+            {
+                string[] words = content.Split(' ');
+
+                List<string> result = new();
+
+                foreach (string word in words)
+                {
+                    if (!Uri.TryCreate(word, UriKind.Absolute, out Uri? uriResult))
+                    {
+                        continue;
+                    }
+
+                    if (!(uriResult.Host == "www.youtube.com" || uriResult.Host == "youtu.be"))
+                    {
+                        continue;
+                    }
+
+                    return word;
+                }
+
+                return string.Empty;
+            });
         }
 
         public static async Task MessageDeleted(DiscordMessage deletedMessage)
