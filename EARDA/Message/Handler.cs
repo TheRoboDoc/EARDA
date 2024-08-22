@@ -23,6 +23,13 @@ namespace EARDA.Message
 
             FileManager.Video video = await FileManager.DownloadVideo(messageArgs.Message.Id, messageArgs.Message.Content);
 
+            if (!FileManager.FileSizeCheck(new FileInfo(video.Path)))
+            {
+                await FileManager.DeleteVideo(video.Path);
+
+                return;
+            }
+
             string textResponse = $"# [{video.Title}](<{video.Url}>)\n**{video.Uploader}**";
 
             FileStream fileStream = File.OpenRead(video.Path);
