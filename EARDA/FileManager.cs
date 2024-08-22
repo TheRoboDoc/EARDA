@@ -78,5 +78,22 @@ namespace EARDA
                 }
             });
         }
+
+        public static bool FileSizeCheck(FileInfo fileInfo)
+        {
+            long fileSizeInBytes = fileInfo.Length;
+            long fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024);
+
+            if (fileSizeInBytes < 50 * 1024 * 1024) // 50 MB in bytes
+            {
+                //The file is under 50 MB.
+                return true;
+            }
+            else
+            {
+                //The file is 50 MB or larger.
+                return false;
+            }
+        }
     }
 }
