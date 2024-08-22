@@ -36,8 +36,6 @@ namespace EARDA
             double downloaedProgress = 0.0f;
             double lastLoggedProgress = 0.0f;
 
-            Program.WriteLog(LogLevel.Debug, $"End time {video.EndTime}", new EventId(201, "File Manager"));
-
             Progress<DownloadProgress> progress = new(p =>
             {
                 downloaedProgress = p.Progress;
