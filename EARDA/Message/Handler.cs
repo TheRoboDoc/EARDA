@@ -48,6 +48,11 @@ namespace EARDA.Message
             {
                 Program.WriteLog(LogLevel.Error, ex.Message, new EventId(301, "Message Handler"));
             }
+
+            fileStream.Close();
+            fileStream.Dispose();
+
+            await FileManager.DeleteVideo(video.Path);
         }
 
         public static async Task MessageDeleted(DiscordMessage deletedMessage)
