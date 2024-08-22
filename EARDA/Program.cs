@@ -19,7 +19,7 @@ namespace EARDA
             DiscordClientBuilder builder = DiscordClientBuilder.CreateDefault
             (
                 token: tokens.token,
-                intents: DiscordIntents.GuildMessages | DiscordIntents.MessageContents
+                intents: DiscordIntents.AllUnprivileged | DiscordIntents.MessageContents | DiscordIntents.GuildMessages
             );
 
             if (DebugStatus())
