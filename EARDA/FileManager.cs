@@ -36,6 +36,8 @@ namespace EARDA
             double downloaedProgress = 0.0f;
             double lastLoggedProgress = 0.0f;
 
+            Program.WriteLog(LogLevel.Debug, $"End time {video.EndTime}", new EventId(201, "File Manager"));
+
             Progress<DownloadProgress> progress = new(p =>
             {
                 downloaedProgress = p.Progress;
@@ -44,7 +46,7 @@ namespace EARDA
                 {
                     lastLoggedProgress = Math.Floor(downloaedProgress * 10) / 10;
 
-                    Program.WriteLog(LogLevel.Information, $"Downloading {title}... Progress: {downloaedProgress:P1}", new EventId(201, "File Manager"));
+                    Program.WriteLog(LogLevel.Information, $"Downloading '{title}'... Progress: {downloaedProgress:P1}", new EventId(201, "File Manager"));
                 }
             });
 
@@ -84,7 +86,7 @@ namespace EARDA
             long fileSizeInBytes = fileInfo.Length;
             long fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024);
 
-            if (fileSizeInBytes < 50 * 1024 * 1024) // 50 MB in bytes
+            if (fileSizeInMegabytes < 50) // 50 MB in bytes
             {
                 //The file is under 50 MB.
                 return true;
