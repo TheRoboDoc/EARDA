@@ -38,10 +38,17 @@ namespace EARDA.Message
             catch (Exception ex)
             {
                 Program.WriteLog(LogLevel.Error, ex.Message, new EventId(301, "Message Handler"));
+
+                fileStream.Close();
+                fileStream.Dispose();
+
+                return;
             }
 
             fileStream.Close();
             fileStream.Dispose();
+
+            await messageArgs.Message.ModifyEmbedSuppressionAsync(true);
 
             await FileManager.DeleteVideo(video.Path);
         }
