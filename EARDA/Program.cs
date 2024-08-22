@@ -10,6 +10,12 @@ namespace EARDA
 
         private static async Task Main()
         {
+            string a = FileManager.Path;
+
+            Console.WriteLine(a);
+
+            await BinaryDownloader();
+
             DiscordClientBuilder builder = DiscordClientBuilder.CreateDefault
             (
                 token: tokens.token,
@@ -71,6 +77,45 @@ namespace EARDA
             }
 
             Client.Logger.Log(level, eventId, "{message}", message);
+        }
+
+        private static async Task BinaryDownloader()
+        {
+            Console.WriteLine("Checking precense of binaries...");
+            Console.WriteLine();
+
+            if (!File.Exists("ffmpeg.exe"))
+            {
+                Console.WriteLine("Couldn't find ffmpeg.exe! Downloading...");
+
+                await YoutubeDLSharp.Utils.DownloadFFmpeg();
+
+                Console.WriteLine("ffmpeg.exe downloaded!");
+                Console.WriteLine();
+            }
+
+            if (!File.Exists("yt-dlp.exe"))
+            {
+                Console.WriteLine("Couldn't find yt-dlp.exe! Downloading...");
+
+                await YoutubeDLSharp.Utils.DownloadYtDlp();
+
+                Console.WriteLine("yt-dlp.exe downloaded!");
+                Console.WriteLine();
+            }
+
+            if (!File.Exists("ffprobe.exe"))
+            {
+                Console.WriteLine("Couldn't find ffprobe.exe! Downloading...");
+
+                await YoutubeDLSharp.Utils.DownloadFFprobe();
+
+                Console.WriteLine("ffprobe.exe downloaded!");
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("Binaries checked!");
+            Console.WriteLine();
         }
     }
 }
