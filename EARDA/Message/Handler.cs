@@ -23,26 +23,11 @@ namespace EARDA.Message
 
             FileManager.Video video = await FileManager.DownloadVideo(messageArgs.Message.Id, messageArgs.Message.Content);
 
-            string textResponse = $"**{video.Uploader}**\n# [{video.Title}](<{video.Url}>)";
+            string textResponse = $"# [{video.Title}](<{video.Url}>)\n**{video.Uploader}**";
 
             FileStream fileStream = File.OpenRead(video.Path);
 
             builder.AddFile(fileStream);
-
-
-
-            builder.Content = textResponse;
-
-            try
-            {
-                await messageArgs.Message.RespondAsync(builder);
-            }
-            catch
-            {
-                Program.WriteLog(LogLevel.Error, "Failed to upload", new EventId(301, "Message Handler"));
-            }
-
-            await FileManager.DeleteVideo(video.Path);
 
             try
             {
@@ -51,6 +36,17 @@ namespace EARDA.Message
             catch (UnauthorizedException)
             {
                 textResponse += $"\n-# {Program.Client?.CurrentUser.Mention} doesn't have **Manage Messages** permission to manage duplicate embeds";
+            }
+
+            builder.Content = textResponse;
+
+            try
+            {
+                await messageArgs.Message.RespondAsync(builder);
+            }
+            catch (Exception ex)
+            {
+                Program.WriteLog(LogLevel.Error, ex.Message, new EventId(301, "Message Handler"));
             }
         }
 
