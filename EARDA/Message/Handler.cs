@@ -29,15 +29,6 @@ namespace EARDA.Message
 
             builder.AddFile(fileStream);
 
-            try
-            {
-                await messageArgs.Message.ModifyEmbedSuppressionAsync(true);
-            }
-            catch (UnauthorizedException)
-            {
-                textResponse += $"\n-# {Program.Client?.CurrentUser.Mention} doesn't have **Manage Messages** permission to manage duplicate embeds";
-            }
-
             builder.Content = textResponse;
 
             try
