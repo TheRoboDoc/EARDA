@@ -1,4 +1,4 @@
-# EARDA (Embed Advertisement Removal Discord App)
+# [EARDA (Embed Advertisement Removal Discord App)](https://discord.com/oauth2/authorize?client_id=1276171892826439861)
 A bot that fixes YouTube embeds in a way that doesn't require one to view ads on Discord
 
 ![EARDA Logo](https://github.com/user-attachments/assets/e8da698e-983e-4da0-a1f5-5141fc5b860e)
