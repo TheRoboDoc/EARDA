@@ -1,6 +1,5 @@
 ﻿using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
-using DSharpPlus.Exceptions;
 using Microsoft.Extensions.Logging;
 
 namespace EARDA.Message
@@ -62,7 +61,7 @@ namespace EARDA.Message
 
         public static async Task<string> GetLinkFromMessage(string content)
         {
-            return await Task.Run(() => 
+            return await Task.Run(() =>
             {
                 string[] words = content.Split(' ');
 
