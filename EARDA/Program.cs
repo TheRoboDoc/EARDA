@@ -10,9 +10,8 @@ namespace EARDA
 
         private static async Task Main()
         {
-            string a = FileManager.Path;
-
-            Console.WriteLine(a);
+            Console.WriteLine($"Data path: {FileManager.Path}");
+            Console.WriteLine();
 
             await BinaryDownloader();
 
@@ -60,6 +59,9 @@ namespace EARDA
                     }
                 })
             );
+
+            Console.WriteLine("Setting the bot to start...");
+            Console.WriteLine();
 
             Client = builder.Build();
 
@@ -111,7 +113,7 @@ namespace EARDA
 
         private static async Task BinaryDownloader()
         {
-            Console.WriteLine("Checking precense of binaries...");
+            Console.WriteLine("Checking precense of required binaries...");
             Console.WriteLine();
 
             if (!File.Exists("ffmpeg.exe") && !File.Exists("ffmpeg"))
