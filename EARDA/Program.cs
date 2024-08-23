@@ -37,6 +37,27 @@ namespace EARDA
                 x.HandleMessageCreated(async (client, args) =>
                 {
                     await Message.Handler.MessagePosted(args);
+                }).
+                HandleMessageDeleted(async (client, args) =>
+                {
+                    if (args.Message.Author is null)
+                    {
+                        return;
+                    }
+
+                    if (args.Message.Author.IsBot)
+                    {
+                        return;
+                    }
+
+                    try
+                    {
+                        await Message.Handler.MessageDeleted(args.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        WriteLog(LogLevel.Error, ex.Message, new EventId(301, "Message Handler"));
+                    }
                 })
             );
 
