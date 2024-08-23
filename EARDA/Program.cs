@@ -114,33 +114,33 @@ namespace EARDA
             Console.WriteLine("Checking precense of binaries...");
             Console.WriteLine();
 
-            if (!File.Exists("ffmpeg.exe"))
+            if (!File.Exists("ffmpeg.exe") && !File.Exists("ffmpeg"))
             {
-                Console.WriteLine("Couldn't find ffmpeg.exe! Downloading...");
+                Console.WriteLine("Couldn't find ffmpeg! Downloading...");
 
                 await YoutubeDLSharp.Utils.DownloadFFmpeg();
 
-                Console.WriteLine("ffmpeg.exe downloaded!");
+                Console.WriteLine("ffmpeg downloaded!");
                 Console.WriteLine();
             }
 
-            if (!File.Exists("yt-dlp.exe"))
+            if (!File.Exists("yt-dlp.exe") && !File.Exists("yt-dlp"))
             {
-                Console.WriteLine("Couldn't find yt-dlp.exe! Downloading...");
+                Console.WriteLine("Couldn't find yt-dlp! Downloading...");
 
                 await YoutubeDLSharp.Utils.DownloadYtDlp();
 
-                Console.WriteLine("yt-dlp.exe downloaded!");
+                Console.WriteLine("yt-dlp downloaded!");
                 Console.WriteLine();
             }
 
-            if (!File.Exists("ffprobe.exe"))
+            if (!File.Exists("ffprobe.exe") && !File.Exists("ffprobe"))
             {
-                Console.WriteLine("Couldn't find ffprobe.exe! Downloading...");
+                Console.WriteLine("Couldn't find ffprobe! Downloading...");
 
                 await YoutubeDLSharp.Utils.DownloadFFprobe();
 
-                Console.WriteLine("ffprobe.exe downloaded!");
+                Console.WriteLine("ffprobe downloaded!");
                 Console.WriteLine();
             }
 
