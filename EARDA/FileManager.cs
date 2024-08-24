@@ -56,7 +56,7 @@ namespace EARDA
             {
                 Title = title,
                 Uploader = uploader,
-                Url = url,
+                Url = url, 
                 Path = path,
                 id = id
             };

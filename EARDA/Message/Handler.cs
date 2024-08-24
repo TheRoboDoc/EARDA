@@ -29,7 +29,7 @@ namespace EARDA.Message
                 return;
             }
 
-            string textResponse = $"# [{video.Title}](<{video.Url}>)\n**{video.Uploader}**";
+            string textResponse = $"# [{video.Title}](<{video.Url}>) \n**{video.Uploader}**";
 
             FileStream fileStream = File.OpenRead(video.Path);
 
