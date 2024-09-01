@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using YoutubeDLSharp;
 using YoutubeDLSharp.Metadata;
+using YoutubeDLSharp.Options;
 
 namespace EARDA
 {
@@ -18,7 +19,7 @@ namespace EARDA
             public ulong id;
         }
 
-        public static async Task<Video> DownloadVideo(ulong id, string url)
+        public static async Task<Video?> DownloadVideo(ulong id, string url)
         {
             YoutubeDL ytdlp = new()
             {
@@ -48,7 +49,24 @@ namespace EARDA
                 }
             });
 
-            RunResult<string> downloadResult = await ytdlp.RunVideoDownload(url, progress: progress);
+            OptionSet options = new()
+            {
+                Format = "bv[filesize_approx<=15M]+ba[filesize_approx<10M]",
+                NoContinue = true,
+            };
+
+            RunResult<string> downloadResult;
+
+            try
+            {
+                downloadResult = await ytdlp.RunVideoDownload(url, progress: progress, overrideOptions: options);
+            }
+            catch (Exception ex)
+            {
+                Program.WriteLog(LogLevel.Warning, ex.Message, new EventId(201, "File Manager"));
+
+                return null;
+            }
 
             string path = downloadResult.Data;
 
@@ -56,7 +74,7 @@ namespace EARDA
             {
                 Title = title,
                 Uploader = uploader,
-                Url = url, 
+                Url = url,
                 Path = path,
                 id = id
             };
@@ -84,14 +102,14 @@ namespace EARDA
             long fileSizeInBytes = fileInfo.Length;
             long fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024);
 
-            if (fileSizeInMegabytes < 50) // 50 MB in bytes
+            if (fileSizeInMegabytes < 25) // 25 MB in bytes
             {
-                //The file is under 50 MB.
+                //The file is under 25 MB.
                 return true;
             }
             else
             {
-                //The file is 50 MB or larger.
+                //The file is 25 MB or larger.
                 return false;
             }
         }

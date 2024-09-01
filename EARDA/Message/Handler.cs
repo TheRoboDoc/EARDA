@@ -27,7 +27,14 @@ namespace EARDA.Message
 
             DiscordMessageBuilder builder = new();
 
-            FileManager.Video video = await FileManager.DownloadVideo(messageArgs.Message.Id, link);
+            FileManager.Video? downloadResult = await FileManager.DownloadVideo(messageArgs.Message.Id, link);
+
+            if (downloadResult == null)
+            {
+                return;
+            }
+
+            FileManager.Video video = downloadResult.Value;
 
             if (!FileManager.FileSizeCheck(new FileInfo(video.Path)))
             {
