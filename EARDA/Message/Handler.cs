@@ -18,9 +18,16 @@ namespace EARDA.Message
                 return;
             }
 
+            string? link = await GetLinkFromMessage(messageArgs.Message.Content);
+
+            if (link == string.Empty)
+            {
+                return;
+            }
+
             DiscordMessageBuilder builder = new();
 
-            FileManager.Video video = await FileManager.DownloadVideo(messageArgs.Message.Id, await GetLinkFromMessage(messageArgs.Message.Content));
+            FileManager.Video video = await FileManager.DownloadVideo(messageArgs.Message.Id, link);
 
             if (!FileManager.FileSizeCheck(new FileInfo(video.Path)))
             {
@@ -63,9 +70,7 @@ namespace EARDA.Message
         {
             return await Task.Run(() =>
             {
-                string[] words = content.Split(' ');
-
-                List<string> result = new();
+                string[] words = content.Split([' ', '\n']);
 
                 foreach (string word in words)
                 {
