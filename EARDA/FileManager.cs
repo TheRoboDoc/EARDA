@@ -51,7 +51,7 @@ namespace EARDA
 
             OptionSet options = new()
             {
-                Format = "bv[filesize_approx<=15M]+ba[filesize_approx<10M]",
+                Format = "bestvideo[width>=420][ext=webm][filesize_approx<15MiB]+bestaudio[ext=webm][filesize_approx<10MiB]/bestvideo[width>=420][ext=mp4][filesize_approx<15MiB]+bestaudio[ext=m4a][filesize_approx<10MiB]",
                 NoContinue = true,
             };
 
