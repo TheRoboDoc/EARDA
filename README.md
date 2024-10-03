@@ -1,10 +1,14 @@
 # [EARDA (Embed Advertisement Removal Discord App)](https://discord.com/oauth2/authorize?client_id=1276171892826439861)
-A bot that fixes YouTube embeds in a way that doesn't require one to view ads on Discord
+A bot that fixes YouTube embeds in a way that doesn't require one to view ads or get region locked on Discord
 
 ![EARDA Logo](https://github.com/user-attachments/assets/e8da698e-983e-4da0-a1f5-5141fc5b860e)
 *Made by [Dia](https://x.com/Dia_4R14)*
 
 ### [ADD TO SERVER](https://discord.com/oauth2/authorize?client_id=1276171892826439861)
+
+### Example
+![image](https://github.com/user-attachments/assets/25ac5d85-e081-445f-9ab5-359b527640c3)
+
 
 #### [<img src="https://imgur.com/iEy0nwb.png"> Buy Me A Coffee](https://ko-fi.com/robodoc)
 
