@@ -8,13 +8,12 @@ A Discord YouTube embed fix bot. Allows to view YouTube Discord embeds without h
 
 ### [ADD TO SERVER](https://discord.com/oauth2/authorize?client_id=1276171892826439861)
 
-### Example
+## Example
 #### Before
 ![image](https://github.com/user-attachments/assets/79007f51-7c6d-4aea-b091-79b746e45d59)
 
 #### After
-![image](https://github.com/user-attachments/assets/ca429fe1-ace3-44d4-bd43-e04ff4a21dbf)
-
+![image](https://github.com/user-attachments/assets/c29c51e4-307c-4d71-9435-d570be909498)
 
 #### [<img src="https://imgur.com/iEy0nwb.png"> Buy Me A Coffee](https://ko-fi.com/robodoc)
 
