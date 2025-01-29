@@ -51,7 +51,7 @@ namespace EARDA
 
             OptionSet options = new()
             {
-                Format = "bestvideo[width>=420][ext=webm][filesize_approx<15MiB]+bestaudio[ext=webm][filesize_approx<10MiB]/bestvideo[width>=420][ext=mp4][filesize_approx<15MiB]+bestaudio[ext=m4a][filesize_approx<10MiB]",
+                Format = "bestvideo[width>=360][ext=webm][filesize_approx<7MiB]+bestaudio[ext=webm][filesize_approx<3MiB]/bestvideo[width>=360][ext=mp4][filesize_approx<7MiB]+bestaudio[ext=m4a][filesize_approx<3MiB]",
                 NoContinue = true,
             };
 
@@ -102,7 +102,7 @@ namespace EARDA
             long fileSizeInBytes = fileInfo.Length;
             long fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024);
 
-            if (fileSizeInMegabytes < 25) // 25 MB in bytes
+            if (fileSizeInMegabytes < 10) // 25 MB in bytes
             {
                 //The file is under 25 MB.
                 return true;
