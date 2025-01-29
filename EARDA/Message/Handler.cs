@@ -91,7 +91,7 @@ namespace EARDA.Message
                         continue;
                     }
 
-                    if (!(uriResult.Host == "www.youtube.com" || uriResult.Host == "youtu.be"))
+                    if (!(uriResult.Host == "www.youtube.com" || uriResult.Host == "youtu.be" || uriResult.Host == "youtube.com"))
                     {
                         continue;
                     }
@@ -134,8 +134,26 @@ namespace EARDA.Message
                         return false;
                     }
 
-                    return (content.Contains("https://www.youtube.com") && content.Contains("/watch?v=")) ||
-                            content.Contains("https://youtu.be/");
+                    string[] youtubePatterns =
+                    [
+                        "https://www.youtube.com/watch?v=",
+                        "https://youtube.com/watch?v=",
+                        "https://youtu.be/",
+                        "https://www.youtube.com/embed/",
+                        "https://www.youtube.com/v/",
+                        "https://www.youtube.com/shorts/",
+                        "https://youtube.com/shorts/"
+                    ];
+
+                    foreach (string pattern in youtubePatterns)
+                    {
+                        if (content.Contains(pattern))
+                        {
+                            return true;
+                        }
+                    }
+
+                    return false;
                 });
             }
         }
