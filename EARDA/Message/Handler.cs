@@ -57,7 +57,12 @@ namespace EARDA.Message
             }
             catch (Exception ex)
             {
-                Program.WriteLog(LogLevel.Error, ex.Message, new EventId(301, "Message Handler"));
+                Program.WriteLog(
+                    LogLevel.Error,
+                    ex.Message + string.Join("", ex.Data.Cast<System.Collections.DictionaryEntry>().Select(entry => $"\n{entry.Key}: {entry.Value}")),
+                    new EventId(301, "Message Handler")
+                );
+
 
                 fileStream.Close();
                 fileStream.Dispose();
