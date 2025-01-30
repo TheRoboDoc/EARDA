@@ -102,14 +102,14 @@ namespace EARDA
             long fileSizeInBytes = fileInfo.Length;
             long fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024);
 
-            if (fileSizeInMegabytes < 10) // 25 MB in bytes
+            if (fileSizeInMegabytes < 10) // 10 MB in bytes
             {
-                //The file is under 25 MB.
+                //The file is under 10 MB.
                 return true;
             }
             else
             {
-                //The file is 25 MB or larger.
+                //The file is 10 MB or larger.
                 return false;
             }
         }
