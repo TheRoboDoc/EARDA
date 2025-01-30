@@ -4,8 +4,15 @@ using Microsoft.Extensions.Logging;
 
 namespace EARDA.Message
 {
+    /// <summary>
+    /// Discord message handler
+    /// </summary>
     public static partial class Handler
     {
+        /// <summary>
+        ///     What to do when message is posted, will attempt to run bots main functionality of downloading the video and posting it as a video file
+        /// </summary>
+        /// <param name="messageArgs">User's message that triggered this to be called</param>
         public static async Task MessagePosted(MessageCreatedEventArgs messageArgs)
         {
             if (messageArgs.Author.IsBot)
@@ -78,6 +85,11 @@ namespace EARDA.Message
             await FileManager.DeleteVideo(video.Path);
         }
 
+        /// <summary>
+        ///     Gets a link from message's content
+        /// </summary>
+        /// <param name="content">Message's content</param>
+        /// <returns>A link</returns>
         public static async Task<string> GetLinkFromMessage(string content)
         {
             return await Task.Run(() =>
@@ -103,6 +115,10 @@ namespace EARDA.Message
             });
         }
 
+        /// <summary>
+        ///     What to do when a user deletes a message that originally made us reply. Will attempt to delete our reply message
+        /// </summary>
+        /// <param name="deletedMessage">Message that got deleted</param>
         public static async Task MessageDeleted(DiscordMessage deletedMessage)
         {
             DiscordChannel? channel = deletedMessage.Channel;

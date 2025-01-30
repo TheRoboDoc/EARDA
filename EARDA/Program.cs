@@ -7,8 +7,14 @@ namespace EARDA
 {
     internal class Program
     {
+        /// <summary>
+        ///     Discord Client used by the bot overall
+        /// </summary>
         public static DiscordClient? Client { get; private set; }
 
+        /// <summary>
+        ///     Main thread
+        /// </summary>
         private static async Task Main()
         {
             Console.WriteLine($"Data path: {FileManager.Path}");
@@ -98,6 +104,9 @@ namespace EARDA
             await Task.Delay(-1);
         }
 
+        /// <summary>
+        ///     Runs yt-dlp -U to check and update yt-dlp if needed
+        /// </summary>
         private static void RunUpdate()
         {
             YoutubeDL ytdlp = new();
@@ -106,6 +115,12 @@ namespace EARDA
             WriteLog(LogLevel.Information, ytdlp.RunUpdate().Result, new EventId(302, "Updater"));
         }
 
+        /// <summary>
+        ///     Checks if bot is running in debug mode
+        /// </summary>
+        /// <returns>
+        ///     Return <c>true</c> if running in debug mode, return <c>false</c> if running in normal mode
+        /// </returns>
         public static bool DebugStatus()
         {
             bool debugState = false;
@@ -118,6 +133,12 @@ namespace EARDA
             return debugState;
         }
 
+        /// <summary>
+        ///     Helper function to write log messages
+        /// </summary>
+        /// <param name="level">Logging level of the log message</param>
+        /// <param name="message">Contents of the log message</param>
+        /// <param name="eventId">Event ID of the event that is sending the log message</param>
         public static void WriteLog(LogLevel level, string message, EventId eventId)
         {
             if (Client is null)
@@ -130,6 +151,9 @@ namespace EARDA
             Client.Logger.Log(level, eventId, "{message}", message);
         }
 
+        /// <summary>
+        ///     Checks for missing binaries and downloads them if needed
+        /// </summary>
         private static async Task BinaryDownloader()
         {
             Console.WriteLine("Checking precense of required binaries...");

@@ -5,10 +5,19 @@ using YoutubeDLSharp.Options;
 
 namespace EARDA
 {
+    /// <summary>
+    ///     Handles file manipulation
+    /// </summary>
     public static class FileManager
     {
+        /// <summary>
+        ///     Path where all downloaded data is stored
+        /// </summary>
         public static readonly string Path = $"{AppDomain.CurrentDomain.BaseDirectory}Data";
 
+        /// <summary>
+        ///     Structure for handling the video
+        /// </summary>
         public struct Video
         {
             public string Title;
@@ -19,6 +28,14 @@ namespace EARDA
             public ulong id;
         }
 
+        /// <summary>
+        ///     Downloads a video from the given URL
+        /// </summary>
+        /// <param name="id">ID of the message</param>
+        /// <param name="url">URL of the video to download</param>
+        /// <returns>
+        ///     Video <c>struct</c> or null if download failed
+        /// </returns>
         public static async Task<Video?> DownloadVideo(ulong id, string url)
         {
             YoutubeDL ytdlp = new()
@@ -80,6 +97,10 @@ namespace EARDA
             };
         }
 
+        /// <summary>
+        ///     Deletes a video
+        /// </summary>
+        /// <param name="path">Path to the video</param>
         public static async Task DeleteVideo(string path)
         {
             await Task.Run(() =>
@@ -97,6 +118,13 @@ namespace EARDA
             });
         }
 
+        /// <summary>
+        ///     Checks if file's size is within Discord file size limits
+        /// </summary>
+        /// <param name="fileInfo"></param>
+        /// <returns>
+        ///     <c>true</c> if file is under 10 MiB, <c>false</c> if file larger than 10 MiB
+        /// </returns>
         public static bool FileSizeCheck(FileInfo fileInfo)
         {
             long fileSizeInBytes = fileInfo.Length;
