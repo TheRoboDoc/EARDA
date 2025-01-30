@@ -1,6 +1,7 @@
 ﻿using DSharpPlus;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using YoutubeDLSharp;
 
 namespace EARDA
 {
@@ -84,7 +85,25 @@ namespace EARDA
 
             WriteLog(LogLevel.Information, "Bot is now operational and running!", LoggerEvents.Startup);
 
+            _ = Task.Run(async () =>
+            {
+                while (true)
+                {
+                    RunUpdate();
+
+                    await Task.Delay(TimeSpan.FromDays(1));
+                }
+            });
+
             await Task.Delay(-1);
+        }
+
+        private static void RunUpdate()
+        {
+            YoutubeDL ytdlp = new();
+
+            WriteLog(LogLevel.Information, "Runnig yt-dlp updater", new EventId(302, "Updater"));
+            WriteLog(LogLevel.Information, ytdlp.RunUpdate().Result, new EventId(302, "Updater"));
         }
 
         public static bool DebugStatus()
@@ -120,7 +139,7 @@ namespace EARDA
             {
                 Console.WriteLine("Couldn't find ffmpeg! Downloading...");
 
-                await YoutubeDLSharp.Utils.DownloadFFmpeg();
+                await Utils.DownloadFFmpeg();
 
                 Console.WriteLine("ffmpeg downloaded!");
                 Console.WriteLine();
@@ -130,7 +149,7 @@ namespace EARDA
             {
                 Console.WriteLine("Couldn't find yt-dlp! Downloading...");
 
-                await YoutubeDLSharp.Utils.DownloadYtDlp();
+                await Utils.DownloadYtDlp();
 
                 Console.WriteLine("yt-dlp downloaded!");
                 Console.WriteLine();
@@ -140,7 +159,7 @@ namespace EARDA
             {
                 Console.WriteLine("Couldn't find ffprobe! Downloading...");
 
-                await YoutubeDLSharp.Utils.DownloadFFprobe();
+                await Utils.DownloadFFprobe();
 
                 Console.WriteLine("ffprobe downloaded!");
                 Console.WriteLine();
