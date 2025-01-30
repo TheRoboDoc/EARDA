@@ -103,7 +103,7 @@ namespace EARDA.Message
                         continue;
                     }
 
-                    if (!(uriResult.Host == "www.youtube.com" || uriResult.Host == "youtu.be" || uriResult.Host == "youtube.com"))
+                    if (!(uriResult.Host == "www.youtube.com" || uriResult.Host == "youtu.be" || uriResult.Host == "youtube.com" || uriResult.Host == "www.tiktok.com"))
                     {
                         continue;
                     }
@@ -158,7 +158,8 @@ namespace EARDA.Message
                         "https://www.youtube.com/embed/",
                         "https://www.youtube.com/v/",
                         "https://www.youtube.com/shorts/",
-                        "https://youtube.com/shorts/"
+                        "https://youtube.com/shorts/",
+                        "https://www.tiktok.com/@"
                     ];
 
                     foreach (string pattern in youtubePatterns)
